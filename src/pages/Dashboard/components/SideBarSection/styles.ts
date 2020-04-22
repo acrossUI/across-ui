@@ -14,14 +14,6 @@ export const SideBarSection = styled.div`
   div {
     display: flex;
     justify-content: space-around;
-    input {
-      background: transparent;
-      border: 1px solid #33354a;
-      color: #fff;
-      height: 28px;
-      width: 72px;
-      margin-bottom: 12px;
-    }
   }
 `;
 
