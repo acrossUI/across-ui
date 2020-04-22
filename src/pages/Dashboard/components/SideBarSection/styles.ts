@@ -10,11 +10,6 @@ export const SideBarSection = styled.div`
   margin-top: 70px;
   display: flex;
   flex-direction: column;
-
-  div {
-    display: flex;
-    justify-content: space-around;
-  }
 `;
 
 export const SectionTitle = styled.span`

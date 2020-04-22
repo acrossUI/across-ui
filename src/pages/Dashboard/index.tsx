@@ -24,6 +24,9 @@ export default () => (
             <SideBarInput value={132} title="Width" />
             <SideBarInput value={44} title="Height" />
           </Row>
+          <Row>
+            <SideBarInput value={-10} title="Angle" />
+          </Row>
         </SideBarSection>
         <SideBarSection title="Tipografy"></SideBarSection>
         <SideBarSection title="Fill"></SideBarSection>

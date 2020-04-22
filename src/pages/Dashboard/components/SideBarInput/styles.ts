@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  display: flex;
   flex-direction: column;
   margin: 12px 0 12px;
+  width: 72px;
   span {
     color: #8d8ea1;
     font-size: 9px;
@@ -11,7 +13,6 @@ export const Container = styled.div`
     letter-spacing: 1px;
   }
   input {
-    width: 72px;
     height: 28px;
     padding: 4px 8px;
     background: transparent;
