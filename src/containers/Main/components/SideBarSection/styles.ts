@@ -17,7 +17,7 @@ export const SectionTitle = styled.span`
   font-size: 12px;
   margin-bottom: 16px;
   text-transform: uppercase;
-  color: #ffffff;
+  color: ${(props) => props.theme.sectionTitle};
 `;
 
 export const Separator = styled.div`

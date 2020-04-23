@@ -13,7 +13,7 @@ html, body, #root {
   }
 
 body {
-  background: #0E1420;
+  background: ${(props) => props.theme.primary};
   -webkit-font-smoothing: antialiased;
   font: 14px 'Nunito', sans-serif;
 }
