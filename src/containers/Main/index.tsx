@@ -15,7 +15,7 @@ export default () => (
   <Container>
     <TopBar />
     <Wrapper>
-      <SideBar></SideBar>
+      <SideBar><TreeView /></SideBar>
       <Content />
       <SideBar>
         <SideBarSection title="Layout">
