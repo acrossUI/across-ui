@@ -8,22 +8,21 @@ import SideBarSubSection from './components/SideBarSubSection';
 import Layout from './components/Layout';
 
 import SideBarInput from './components/SideBarInput';
+
 import { Container, Wrapper, Content } from './styles';
 
 export default () => (
   <Container>
     <TopBar />
     <Wrapper>
-      <SideBar>
-        <TreeView />
-      </SideBar>
+      <SideBar><TreeView /></SideBar>
       <Content />
       <SideBar>
         <SideBarSection title="Layout">
           <Layout />
         </SideBarSection>
-        <SideBarSection title="Tipografy" />
-        <SideBarSection title="Fill" />
+        <SideBarSection title="Tipografy"></SideBarSection>
+        <SideBarSection title="Fill"></SideBarSection>
       </SideBar>
     </Wrapper>
   </Container>
