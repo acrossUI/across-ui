@@ -15,14 +15,16 @@ export default () => (
   <Container>
     <TopBar />
     <Wrapper>
-      <SideBar><TreeView /></SideBar>
+      <SideBar>
+        <TreeView />
+      </SideBar>
       <Content />
       <SideBar>
         <SideBarSection title="Layout">
           <Layout />
         </SideBarSection>
-        <SideBarSection title="Tipografy"></SideBarSection>
-        <SideBarSection title="Fill"></SideBarSection>
+        <SideBarSection title="Tipografy" />
+        <SideBarSection title="Fill" />
       </SideBar>
     </Wrapper>
   </Container>
