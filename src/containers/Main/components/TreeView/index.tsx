@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Tree } from 'antd';
+import { CarryOutOutlined, FormOutlined } from '@ant-design/icons';
+import { Container } from './styles';
 
 const Demo = () => {
   const [gData, setGdata] = useState([
@@ -116,14 +118,18 @@ const Demo = () => {
   };
 
   return (
-    <Tree
-      className="draggable-tree"
-      draggable
-      blockNode
-      onDragEnter={onDragEnter}
-      onDrop={onDrop}
-      treeData={gData}
-    />
+    <Container>
+      <Tree
+        className="draggable-tree"
+        draggable
+        showIcon
+        showLine
+        blockNode
+        onDragEnter={onDragEnter}
+        onDrop={onDrop}
+        treeData={gData}
+      />
+    </Container>
   );
 };
 
