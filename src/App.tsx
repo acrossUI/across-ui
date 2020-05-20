@@ -6,7 +6,7 @@ import Routes from './routes';
 
 import store from './store';
 
-import dark from './containers/themes/dark';
+import dark from './pages/themes/dark';
 import GlobalStyle from './commons/styles/global';
 
 const App: React.FC = () => (
