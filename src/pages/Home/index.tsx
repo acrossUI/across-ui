@@ -16,7 +16,7 @@ export default () => {
     <Container>
       <TopBar />
       <Wrapper>
-        <SideToolBar />
+        <SideToolBar canvasRef={canvasRef} />
         <SideBar />
         <Content>
           <Canvas ref={canvasRef} onZoom={(zoom) => console.log(zoom)} />
