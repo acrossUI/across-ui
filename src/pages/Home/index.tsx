@@ -4,7 +4,7 @@ import SideToolBar from './components/SideToolBar';
 import TopBar from './components/TopBar';
 import FooterToolBar from './components/FooterToolbar';
 import TreeView from './components/TreeView';
-import Canvas from '../../components/canvas/Canvas';
+import Canvas from '../../components/Canvas';
 
 import { Container, Wrapper, Content } from './styles';
 
@@ -19,13 +19,15 @@ export default () => {
         <SideToolBar canvasRef={canvasRef} />
         <SideBar />
         <Content>
-          <Canvas ref={canvasRef} onZoom={(zoom) => console.log(zoom)} />
-          <FooterToolBar
+          <Canvas />
+          {/**
+           *    <FooterToolBar
             preview={() => {}}
             onChangePreview={() => {}}
             zoomRatio={zoomRatio}
             canvasRef={canvasRef}
           />
+           */}
         </Content>
         <SideBar />
       </Wrapper>

@@ -34,6 +34,8 @@
     "react-hooks/exhaustive": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "import/prefer-default-export": "off",
+    "no-var": "off",
+    "one-var": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

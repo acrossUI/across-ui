@@ -3,7 +3,7 @@ import './config/ReactotronConfig';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-import TestMoveable from './containers/Tests/TestMoveable';
+import TestMoveable from './pages/Tests/TestMoveable';
 
 ReactDOM.render(
   <React.StrictMode>
