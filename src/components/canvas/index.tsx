@@ -1,6 +1,11 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
 
-//import difference from 'lodash/difference';
+// import difference from 'lodash/difference';
 import { fabric } from 'fabric';
 
 const MARKER = {
@@ -50,7 +55,12 @@ const canvasSize = {
   height: 400,
 };
 
-const Canvas: React.FC = () => {
+interface CanvasProps {
+  props?: any;
+  ref?: any;
+}
+
+const Canvas: React.FC<CanvasProps> = forwardRef((props, ref) => {
   const containerRef = useRef(null);
   var canvas, mainRect;
 
@@ -144,6 +154,7 @@ const Canvas: React.FC = () => {
     });
     canvas.add(mainRect);
     canvas.centerObject(mainRect);
+
     events.mousewheel();
     events.mousedown();
   };
@@ -177,6 +188,10 @@ const Canvas: React.FC = () => {
   }
  */
 
+  useImperativeHandle(ref, () => ({
+    handlers,
+  }));
+
   return (
     <div
       ref={containerRef}
@@ -189,6 +204,6 @@ const Canvas: React.FC = () => {
       <canvas id="c" />
     </div>
   );
-};
+});
 
 export default Canvas;
