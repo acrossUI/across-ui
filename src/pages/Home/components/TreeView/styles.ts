@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  flex: 1;
-  border: 1px solid yellow;
-  background: #fff;
+  background: ${(props) => props.theme.secondary};
+  width: 300px;
 `;

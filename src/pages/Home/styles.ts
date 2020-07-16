@@ -13,6 +13,12 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   display: flex;
-  min-width: 700px;
+  align-items: center;
+  justify-content: center;
   flex: 1;
+`;
+
+export const PaperBoard = styled.div`
+  width: 40%;
+  height: 90%;
 `;

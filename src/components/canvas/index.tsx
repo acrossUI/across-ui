@@ -54,14 +54,14 @@ interface CanvasProps {
   onAdd?: Function;
   onRemove?: Function;
   onSelect?: Function;
-  ref?: any;
+  ref?: React.MutableRefObject<any>;
+  paperBoardRef?: React.MutableRefObject<any>;
 }
 
 const Canvas: React.FC<CanvasProps> = forwardRef(
-  ({ onAdd, onRemove, onSelect }, ref) => {
+  ({ onAdd, onRemove, onSelect, paperBoardRef }, ref) => {
     const [clipboard, setClipBoard] = useState(null);
-    const containerRef = useRef(null);
-    var canvas, mainRect;
+    var canvas;
 
     const defaultCanvasOption = {
       preserveObjectStacking: true,
@@ -292,7 +292,6 @@ const Canvas: React.FC<CanvasProps> = forwardRef(
       resize: (currentWidth, currentHeight, nextWidth, nextHeight) => {
         canvas.setWidth(nextWidth);
         canvas.setHeight(nextHeight);
-        canvas.centerObject(mainRect);
         const diffWidth = nextWidth / 2 - currentWidth / 2;
         const diffHeight = nextHeight / 2 - currentHeight / 2;
         canvas.getObjects().forEach((object, index) => {
@@ -309,25 +308,20 @@ const Canvas: React.FC<CanvasProps> = forwardRef(
       canvas = new fabric.Canvas(
         'c',
         Object.assign({}, defaultCanvasOption, {
-          width: containerRef.current.clientWidth,
-          height: containerRef.current.clientHeight,
+          width: paperBoardRef.current.clientWidth,
+          height: paperBoardRef.current.clientHeight,
+          fill: '#fff',
+          hasControls: false,
+          selectable: false,
+          lockMovementX: true,
+          lockMovementY: true,
+          top: 0,
+          left: 0,
+          hoverCursor: 'default',
         }),
       );
-      mainRect = new fabric.Rect({
-        width: containerRef.current.clientWidth * 0.4,
-        height: containerRef.current.clientHeight * 0.85,
-        fill: '#fff',
-        hasControls: false,
-        selectable: false,
-        lockMovementX: true,
-        lockMovementY: true,
-        top: 0,
-        left: 0,
-        hoverCursor: 'default',
-      });
-      mainRect.setShadow('2px 3px 3px  rgba(0,0,0,0.15)');
-      canvas.add(mainRect);
-      canvas.centerObject(mainRect);
+
+      //canvas.setShadow('2px 3px 3px  rgba(0,0,0,0.15)');
 
       events.mousewheel();
       events.mousedown();
@@ -366,18 +360,7 @@ const Canvas: React.FC<CanvasProps> = forwardRef(
       handlers,
     }));
 
-    return (
-      <div
-        ref={containerRef}
-        style={{
-          border: '1px solid red',
-          width: '100%',
-          height: '100%',
-        }}
-      >
-        <canvas id="c" style={{ border: '1px solid yellow' }} />
-      </div>
-    );
+    return <canvas id="c" />;
   },
 );
 

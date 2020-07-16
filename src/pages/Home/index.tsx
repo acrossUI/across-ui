@@ -6,10 +6,11 @@ import FooterToolBar from './components/FooterToolbar';
 import TreeView from './components/TreeView';
 import Canvas from '../../components/Canvas';
 
-import { Container, Wrapper, Content } from './styles';
+import { Container, Wrapper, Content, PaperBoard } from './styles';
 
 export default () => {
   const canvasRef = useRef(null);
+  const paperBoardRef = useRef(null);
   const [zoomRatio, setZoomRatio] = useState(1);
   const [items, setItems] = useState({});
   const [selectedItem, setSelectedItem] = useState();
@@ -87,14 +88,18 @@ export default () => {
       <TopBar />
       <Wrapper>
         <SideToolBar canvasRef={canvasRef} />
-        <SideBar />
+        <TreeView />
         <Content>
-          <Canvas
-            ref={canvasRef}
-            onAdd={(e) => console.log('onAdd ==>', e)}
-            onRemove={(e) => console.log('onRemove ==>', e)}
-            onSelect={(e) => console.log('onSelect ==>', e)}
-          />
+          <PaperBoard ref={paperBoardRef}>
+            <Canvas
+              ref={canvasRef}
+              paperBoardRef={paperBoardRef}
+              onAdd={(e) => console.log('onAdd ==>', e)}
+              onRemove={(e) => console.log('onRemove ==>', e)}
+              onSelect={(e) => console.log('onSelect ==>', e)}
+            />
+          </PaperBoard>
+
           {/**
            *    <FooterToolBar
             preview={() => {}}
