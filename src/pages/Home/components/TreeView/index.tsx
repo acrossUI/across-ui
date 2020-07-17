@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tree, Switch } from 'antd';
+import { Tree, Switch, Button } from 'antd';
 import { CarryOutOutlined, FormOutlined } from '@ant-design/icons';
 
 import { Container } from './styles';
@@ -58,7 +58,6 @@ const Demo: React.FC<{}> = () => {
   return (
     <Container>
       <Tree
-        style={{ background: 'red' }}
         showLine={showLine}
         showIcon={showIcon}
         defaultExpandedKeys={['0-0-0']}

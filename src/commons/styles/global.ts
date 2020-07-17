@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import 'antd/dist/antd.css';
 
+// variables to override above
 export default createGlobalStyle`
 
 * {
@@ -23,5 +23,6 @@ body {
 button: {
     cursor: pointer;
   }
+
 
 `;

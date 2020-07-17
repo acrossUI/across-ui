@@ -16,6 +16,8 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "4.0.0",
+    "@craco/craco": "^5.6.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -29,7 +31,7 @@
     "@types/warning": "^3.0.0",
     "animejs": "^3.2.0",
     "antd": "4.4.2",
-    "@ant-design/icons": "4.0.0",
+    "craco-less": "^1.17.0",
     "echarts": "^4.7.0",
     "fabric": "^3.6.3",
     "gifler": "^0.1.0",
@@ -56,10 +58,10 @@
     "uuid": "^8.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "browserslist": {
     "production": [
