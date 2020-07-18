@@ -96,6 +96,15 @@ const Canvas = forwardRef(
           });
         }
       },
+      saveToJSON: () => {
+        return JSON.stringify(canvas.toJSON());
+      },
+      loadJSON: (json) => {
+        canvas.clear();
+        canvas.loadFromJSON(json, () => {
+          canvas.renderAll();
+        });
+      },
       removeById: (id) => {
         const findObject = handlers.findById(id);
         if (findObject) {
