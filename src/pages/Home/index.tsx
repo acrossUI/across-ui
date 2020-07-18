@@ -3,8 +3,9 @@ import SideBar from './components/SideBar';
 import SideToolBar from './components/SideToolBar';
 import TopBar from './components/TopBar';
 import FooterToolBar from './components/FooterToolbar';
-import TreeView from './components/TreeView';
+import TreeView from '../../components/TreeView';
 import Canvas from '../../components/Canvas';
+import Icon from '../../components/Icon';
 
 import { Container, Wrapper, Content, PaperBoard } from './styles';
 
@@ -12,45 +13,44 @@ export default () => {
   const canvasRef = useRef(null);
   const paperBoardRef = useRef(null);
   const [zoomRatio, setZoomRatio] = useState(1);
-  const [items, setItems] = useState({});
+  const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState();
+  const [treeData, setTreeData] = useState([
+    {
+      title: 'MainPage',
+      key: 99,
+      icon: <Icon name="frame" />,
+      children: [
+        {
+          title: 'Text',
+          key: '0',
+          icon: <Icon name="text" />,
+        },
+        {
+          title: 'Box',
+          key: '1',
+          icon: <Icon name="box" />,
+        },
+        {
+          title: 'Circle',
+          key: '2',
+          icon: <Icon name="circle" />,
+        },
+        {
+          title: 'Line',
+          key: '4',
+          icon: <Icon name="line" />,
+        },
+      ],
+    },
+  ]);
 
   const handlers = {
-    onAdd: (obj) => {
-      if (obj.type === 'activeSelection') {
-        const newItems = {};
-        obj.forEachObject((obj) => {
-          Object.assign(newItems, items, {
-            [obj.id]: obj,
-          });
-        });
-        /*
-        setState(
-          {
-            items: newItems,
-          },
-          () => {
-            handlers.onSelect(null);
-          },
-        );
-        */
-        setItems(newItems);
-      } else {
-        const newItems = Object.assign({}, items, {
-          [obj.id]: obj,
-        });
-        setItems(newItems);
-      }
+    onAddItem: (obj) => {
+      console.log(obj);
     },
     onSelect: (obj) => {
-      if (obj && !obj._objects) {
-        setSelectedItem(obj);
-        if (obj.id) {
-          canvasRef.current.handlers.select(obj);
-        }
-      } else {
-        setSelectedItem(canvasRef.current.mainRect);
-      }
+      setSelectedItem(obj);
     },
     /*
     onRemove: (obj) => {
@@ -67,36 +67,22 @@ export default () => {
     */
   };
 
-  useEffect(() => {
-    // test add a retangle using forwardRef
-    // test add a retangle using forwardRef
-
-    canvasRef.current.handlers.add({
-      key: 'default',
-      type: 'textbox',
-      icon: 'font',
-      title: 'Text',
-      option: {
-        text: 'Input text',
-        name: 'New text',
-      },
-    });
-  }, []);
+  console.log(canvasRef);
 
   return (
     <Container>
       <TopBar />
       <Wrapper>
         <SideToolBar canvasRef={canvasRef} />
-        <TreeView />
+        <TreeView treeData={treeData} expandedKeys={[99]} />
         <Content>
           <PaperBoard ref={paperBoardRef}>
             <Canvas
               ref={canvasRef}
               paperBoardRef={paperBoardRef}
-              onAdd={(e) => console.log('onAdd ==>', e)}
+              onAdd={handlers.onAddItem}
               onRemove={(e) => console.log('onRemove ==>', e)}
-              onSelect={(e) => console.log('onSelect ==>', e)}
+              onSelect={handlers.onSelect}
             />
           </PaperBoard>
 

@@ -1,78 +1,39 @@
 import React, { useEffect } from 'react';
-import { v4 } from 'uuid';
-import { FaSquare, FaCircle } from 'react-icons/fa';
-import { AiOutlineLine } from 'react-icons/ai';
-import { Container } from './styles';
 import { v4 as uuid } from 'uuid';
+import Icon from '../../../../components/Icon';
+import { Container } from './styles';
 
 interface SideToolBarProps {
   canvasRef?: React.MutableRefObject<any>;
 }
 
-const SideToolBar: React.FC<SideToolBarProps> = ({ canvasRef }) => {
-  const defaultIconProps = {
-    color: '#8D8EA1',
-    size: 24,
-    style: {
-      marginTop: 10,
-    },
-  };
+const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
+  const IMAGE = [];
 
-  const MARKER = [
+  const SHAPE = [
     {
-      key: 'default',
-      type: 'itext',
-      icon: 'map-marker',
-      title: 'Marker',
-      option: {
-        text: '\uf041', // map-marker
-        fontFamily: 'FontAwesome',
-        fontSize: 60,
-        editable: false,
-        name: 'New marker',
-      },
+      key: 'line',
+      icon: 'line',
+      title: 'Line',
     },
-  ];
+    // {
+    //     key: 'polygon',
+    //     icon: 'picture-o',
+    //     title: 'Polygon',
+    // },
 
-  const TEXT = [
     {
       key: 'default',
       type: 'textbox',
-      icon: 'font',
+      icon: 'text',
       title: 'Text',
       option: {
         text: 'Input text',
         name: 'New text',
       },
     },
-  ];
 
-  const IMAGE = [
-    {
-      key: 'default',
-      type: 'image',
-      icon: 'picture-o',
-      title: 'Image',
-      option: {
-        width: 40,
-        height: 40,
-        name: 'New image',
-      },
-    },
-  ];
-
-  const SHAPE = [
-    // {
-    //     key: 'line',
-    //     icon: 'picture-o',
-    //     title: 'Line',
-    // },
-    // {
-    //     key: 'polygon',
-    //     icon: 'picture-o',
-    //     title: 'Polygon',
-    // },
-    {
+    /* {
       key: 'default-triangle',
       type: 'triangle',
       icon: 'picture-o',
@@ -82,12 +43,12 @@ const SideToolBar: React.FC<SideToolBarProps> = ({ canvasRef }) => {
         height: 30,
         name: 'New shape',
       },
-    },
+    }, */
     {
-      key: 'default-rect',
+      key: 'default-box',
       type: 'rect',
-      icon: 'picture-o',
-      title: 'Rectangle',
+      icon: 'box',
+      title: 'Box',
       option: {
         width: 40,
         height: 40,
@@ -97,7 +58,7 @@ const SideToolBar: React.FC<SideToolBarProps> = ({ canvasRef }) => {
     {
       key: 'default-circle',
       type: 'circle',
-      icon: 'picture-o',
+      icon: 'circle',
       title: 'Circle',
       option: {
         radius: 30,
@@ -107,7 +68,7 @@ const SideToolBar: React.FC<SideToolBarProps> = ({ canvasRef }) => {
   ];
 
   const handlers = {
-    onClickItem: (item) => {
+    onClickItem: async (item) => {
       const id = uuid();
       const option = Object.assign({}, item.option, { id });
       const newItem = Object.assign({}, item, { option });
@@ -117,16 +78,13 @@ const SideToolBar: React.FC<SideToolBarProps> = ({ canvasRef }) => {
 
   return (
     <Container>
-      {SHAPE.map((item) => {
-        return (
-          <>
-            <FaSquare
-              {...defaultIconProps}
-              onClick={(): void => handlers.onClickItem(item)}
-            />
-          </>
-        );
-      })}
+      {SHAPE.map((el) => (
+        <Icon
+          name={el.icon}
+          style={{ marginTop: 10 }}
+          onClick={() => handlers.onClickItem(el)}
+        />
+      ))}
     </Container>
   );
 };

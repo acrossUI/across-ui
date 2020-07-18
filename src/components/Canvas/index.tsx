@@ -1,15 +1,16 @@
 import React, {
-  useRef,
-  useState,
   useEffect,
   useImperativeHandle,
   forwardRef,
+  useState,
+  useContext,
 } from 'react';
 
 import { v4 } from 'uuid';
 
 // import difference from 'lodash/difference';
 import { fabric } from 'fabric';
+import { FabricContext } from '../../context/fabricContext';
 
 const FabricObject = {
   itext: {
@@ -58,10 +59,10 @@ interface CanvasProps {
   paperBoardRef?: React.MutableRefObject<any>;
 }
 
-const Canvas: React.FC<CanvasProps> = forwardRef(
-  ({ onAdd, onRemove, onSelect, paperBoardRef }, ref) => {
+const Canvas = forwardRef(
+  ({ onAdd, onRemove, onSelect, paperBoardRef }: CanvasProps, ref) => {
     const [clipboard, setClipBoard] = useState(null);
-    var canvas;
+    const [canvas, initCanvas] = useContext(FabricContext);
 
     const defaultCanvasOption = {
       preserveObjectStacking: true,
@@ -107,7 +108,7 @@ const Canvas: React.FC<CanvasProps> = forwardRef(
       find: (obj) => handlers.findById(obj.id),
       findById: (id) => {
         let findObject;
-        const exist = canvas.getObjects().some((obj) => {
+        const exist = canvas.getObjects().some((obj: any) => {
           if (obj.id === id) {
             findObject = obj;
             return true;
@@ -196,8 +197,8 @@ const Canvas: React.FC<CanvasProps> = forwardRef(
         activeObject.set(key, value);
         activeObject.setCoords();
       },
-      setObject: (obj) => {
-        const activeObject = canvas.getActiveObject();
+      setObject: (obj: any) => {
+        const activeObject: any = canvas.getActiveObject();
         if (obj.id === activeObject.id) {
           Object.keys(obj).forEach((key) => {
             if (obj[key] !== activeObject[key]) {
@@ -209,6 +210,7 @@ const Canvas: React.FC<CanvasProps> = forwardRef(
           console.warn('Object id not equal active object id.');
         }
       },
+
       /*
     setById: (id, key, value) => {
       const findObject = handlers.findObjectById(id);
@@ -223,7 +225,7 @@ const Canvas: React.FC<CanvasProps> = forwardRef(
         findObject.set(key, value);
         activeObject.setCoords();
       }
-    },*/
+    }, */
 
       findByName: (name) => {
         let findObject;
@@ -304,8 +306,8 @@ const Canvas: React.FC<CanvasProps> = forwardRef(
       },
     };
 
-    const initializeCanvas = () => {
-      canvas = new fabric.Canvas(
+    useEffect(() => {
+      const localCanvas = new fabric.Canvas(
         'c',
         Object.assign({}, defaultCanvasOption, {
           width: paperBoardRef.current.clientWidth,
@@ -315,20 +317,18 @@ const Canvas: React.FC<CanvasProps> = forwardRef(
           selectable: false,
           lockMovementX: true,
           lockMovementY: true,
+          preserveObjectStacking: true,
           top: 0,
           left: 0,
           hoverCursor: 'default',
         }),
       );
+      initCanvas(localCanvas);
 
-      //canvas.setShadow('2px 3px 3px  rgba(0,0,0,0.15)');
+      // canvas.setShadow('2px 3px 3px  rgba(0,0,0,0.15)');
 
-      events.mousewheel();
-      events.mousedown();
-    };
-
-    useEffect(() => {
-      initializeCanvas();
+      // events.mousewheel();
+      // events.mousedown();
     }, []);
 
     /*
