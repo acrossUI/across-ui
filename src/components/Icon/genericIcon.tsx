@@ -36,6 +36,17 @@ export const box = () => (
     <rect x="1" y="1" width="14" height="14" stroke="#E1E2EA" strokeWidth="2" />
   </svg>
 );
+
+export const triangle = () => (
+  <svg width="19" height="16" viewBox="0 0 19 16" fill="none">
+    <path
+      d="M2.13878 14.75L9.5 2L16.8612 14.75H2.13878Z"
+      stroke="#E1E2EA"
+      strokeWidth="2"
+    />
+  </svg>
+);
+
 export const text = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <line x1="6" y1="8" x2="6" y2="6" stroke="#E1E2EA" strokeWidth="2" />

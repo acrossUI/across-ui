@@ -15,42 +15,14 @@ export default () => {
   const [zoomRatio, setZoomRatio] = useState(1);
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState();
-  const [treeData, setTreeData] = useState([
-    {
-      title: 'MainPage',
-      key: 99,
-      icon: <Icon name="frame" />,
-      children: [
-        {
-          title: 'Text',
-          key: '0',
-          icon: <Icon name="text" />,
-        },
-        {
-          title: 'Box',
-          key: '1',
-          icon: <Icon name="box" />,
-        },
-        {
-          title: 'Circle',
-          key: '2',
-          icon: <Icon name="circle" />,
-        },
-        {
-          title: 'Line',
-          key: '4',
-          icon: <Icon name="line" />,
-        },
-      ],
-    },
-  ]);
 
   const handlers = {
     onAddItem: (obj) => {
-      console.log(obj);
+      setItems([...items, obj]);
     },
     onSelect: (obj) => {
       setSelectedItem(obj);
+      canvasRef.current.handlers.select(obj);
     },
     /*
     onRemove: (obj) => {
@@ -67,14 +39,17 @@ export default () => {
     */
   };
 
-  console.log(canvasRef);
-
   return (
     <Container>
       <TopBar />
       <Wrapper>
         <SideToolBar canvasRef={canvasRef} />
-        <TreeView treeData={treeData} expandedKeys={[99]} />
+        <TreeView
+          canvasRef={canvasRef}
+          onSelect={handlers.onSelect}
+          items={items}
+          selectedItem={selectedItem}
+        />
         <Content>
           <PaperBoard ref={paperBoardRef}>
             <Canvas

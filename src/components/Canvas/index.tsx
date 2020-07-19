@@ -49,6 +49,12 @@ const FabricObject = {
         ...option,
       }),
   },
+  line: {
+    create: (option) =>
+      new fabric.Line([250, 125, 250, 175], {
+        ...option,
+      }),
+  },
 };
 
 interface CanvasProps {
@@ -97,7 +103,7 @@ const Canvas = forwardRef(
         }
       },
       saveToJSON: () => {
-        return JSON.stringify(canvas.toJSON());
+        return JSON.stringify(canvas.toJSON(['id']));
       },
       loadJSON: (json) => {
         canvas.clear();
@@ -251,8 +257,8 @@ const Canvas = forwardRef(
         }
         return findObject;
       },
-      select: (obj) => {
-        const findObject = handlers.find(obj);
+      select: (id) => {
+        const findObject = handlers.findById(id);
         if (findObject) {
           canvas.setActiveObject(findObject);
           canvas.requestRenderAll();

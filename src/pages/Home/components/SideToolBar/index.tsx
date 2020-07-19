@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
 import { SaveOutlined, FolderOpenOutlined } from '@ant-design/icons';
 import Icon from '../../../../components/Icon';
 import { Container, ButtonsWrapper } from './styles';
@@ -10,22 +10,25 @@ interface SideToolBarProps {
 }
 
 const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
-  const IMAGE = [];
-
   const SHAPE = [
     {
-      key: 'line',
+      key: 'default-line',
+      type: 'line',
       icon: 'line',
       title: 'Line',
+      option: {
+        name: 'New line',
+        stroke: '#000',
+        strokeWidth: 2,
+        noScaleCache: false,
+        strokeUniform: true,
+        originX: 'center',
+        originY: 'center',
+      },
     },
-    // {
-    //     key: 'polygon',
-    //     icon: 'picture-o',
-    //     title: 'Polygon',
-    // },
 
     {
-      key: 'default',
+      key: 'default-text',
       type: 'textbox',
       icon: 'text',
       title: 'Text',
@@ -34,18 +37,21 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
         name: 'New text',
       },
     },
-
-    /* {
+    {
       key: 'default-triangle',
       type: 'triangle',
-      icon: 'picture-o',
+      icon: 'triangle',
       title: 'Triangle',
       option: {
         width: 30,
         height: 30,
+        fill: 'transparent',
+        noScaleCache: false,
+        strokeUniform: true,
+        stroke: 2,
         name: 'New shape',
       },
-    }, */
+    },
     {
       key: 'default-box',
       type: 'rect',
@@ -54,6 +60,10 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
       option: {
         width: 40,
         height: 40,
+        fill: 'transparent',
+        noScaleCache: false,
+        strokeUniform: true,
+        stroke: 2,
         name: 'New shape',
       },
     },
@@ -64,16 +74,19 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
       title: 'Circle',
       option: {
         radius: 30,
+        fill: 'transparent',
+        stroke: 2,
         name: 'New shape',
       },
     },
   ];
 
   const handlers = {
-    onClickItem: async (item) => {
-      const id = uuid();
-      const option = Object.assign({}, item.option, { id });
-      const newItem = Object.assign({}, item, { option });
+    onAddItem: async (item) => {
+      const newItem = {
+        ...item,
+        option: { ...item.option, id: uuid() },
+      };
       canvasRef.current.handlers.add(newItem);
     },
     onJsonDownload: (json) => {
@@ -108,7 +121,7 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
         <Icon
           name={el.icon}
           style={{ marginTop: 10 }}
-          onClick={() => handlers.onClickItem(el)}
+          onClick={() => handlers.onAddItem(el)}
         />
       ))}
       <ButtonsWrapper>
