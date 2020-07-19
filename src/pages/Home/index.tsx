@@ -4,7 +4,7 @@ import SideToolBar from './components/SideToolBar';
 import TopBar from './components/TopBar';
 import FooterToolBar from './components/FooterToolbar';
 import TreeView from '../../components/TreeView';
-import Canvas from '../../components/Canvas';
+import CanvasEngine from '../../components/CanvasEngine';
 import Icon from '../../components/Icon';
 
 import { Container, Wrapper, Content, PaperBoard } from './styles';
@@ -52,7 +52,7 @@ export default () => {
         />
         <Content>
           <PaperBoard ref={paperBoardRef}>
-            <Canvas
+            <CanvasEngine
               ref={canvasRef}
               paperBoardRef={paperBoardRef}
               onAdd={handlers.onAddItem}
