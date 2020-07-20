@@ -18,11 +18,21 @@ export default () => {
 
   const handlers = {
     onAddItem: (obj) => {
+      // receive added items from canvasEngine
+
+      // set added item to active selection
+      canvasRef.current.handlers.select(obj.id);
+
       setItems([...items, obj]);
     },
     onSelect: (obj) => {
+      // receive selected items from canvasEngine
       setSelectedItem(obj);
       canvasRef.current.handlers.select(obj);
+    },
+    onChange: (obj) => {
+      // receive changed fields of sidebar, width, height, angle etc
+      console.log(obj);
     },
     /*
     onRemove: (obj) => {
@@ -56,7 +66,8 @@ export default () => {
               ref={canvasRef}
               paperBoardRef={paperBoardRef}
               onAdd={handlers.onAddItem}
-              onRemove={(e) => console.log('onRemove ==>', e)}
+              // onRemove={(e) => console.log('onRemove ==>', e)}
+              onModified={(e) => {}}
               onSelect={handlers.onSelect}
             />
           </PaperBoard>
@@ -69,7 +80,7 @@ export default () => {
           />
            */}
         </Content>
-        <SideBar />
+        <SideBar onChange={handlers.onChange} selectedItem={selectedItem} />
       </Wrapper>
     </Container>
   );

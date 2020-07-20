@@ -6,6 +6,12 @@ export const chevronDown = () => (
   </svg>
 );
 
+export const chevronRight = () => (
+  <svg width="7" height="11" viewBox="0 0 7 11" fill="none">
+    <path d="M1 10L5 5.5L1 1" stroke="#3C3E52" strokeWidth="2" />
+  </svg>
+);
+
 export const line = ({ size, color }: any) => (
   <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
     <line

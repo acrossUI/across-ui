@@ -14,6 +14,7 @@ module.exports = {
               '@primary-color': '#858FFF',
               '@slider-rail-background-color': '#33354A',
               '@slider-rail-background-color-hover': '#464969',
+              '@border-color-base': '#33354A',
             },
             javascriptEnabled: true,
           },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Main from '../pages/Home';
+import Main from '../pages/Editor';
 
 const Routes: React.FC = () => (
   <Switch>

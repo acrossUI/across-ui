@@ -61,12 +61,16 @@ interface CanvasProps {
   onAdd?: Function;
   onRemove?: Function;
   onSelect?: Function;
+  onModified?: Function;
   ref?: React.MutableRefObject<any>;
   paperBoardRef?: React.MutableRefObject<any>;
 }
 
 const Canvas = forwardRef(
-  ({ onAdd, onRemove, onSelect, paperBoardRef }: CanvasProps, ref) => {
+  (
+    { onAdd, onRemove, onSelect, onModified, paperBoardRef }: CanvasProps,
+    ref,
+  ) => {
     const [clipboard, setClipBoard] = useState(null);
     const [canvas, initCanvas] = useContext(FabricContext);
 
@@ -120,7 +124,9 @@ const Canvas = forwardRef(
           canvas.remove(findObject);
         }
       },
-      find: (obj) => handlers.findById(obj.id),
+      find: (obj) => {
+        handlers.findById(obj.id);
+      },
       findById: (id) => {
         let findObject;
         const exist = canvas.getObjects().some((obj: any) => {
@@ -226,22 +232,6 @@ const Canvas = forwardRef(
         }
       },
 
-      /*
-    setById: (id, key, value) => {
-      const findObject = handlers.findObjectById(id);
-      if (findObject) {
-        findObject.set(key, value);
-        activeObject.setCoords();
-      }
-    },
-    setByName: (name, key, value) => {
-      const findObject = handlers.findObjectByName(name);
-      if (findObject) {
-        findObject.set(key, value);
-        activeObject.setCoords();
-      }
-    }, */
-
       findByName: (name) => {
         let findObject;
         const exist = canvas.getObjects().some((obj) => {
@@ -281,29 +271,12 @@ const Canvas = forwardRef(
     };
 
     const events = {
-      mousewheel: () => {
-        canvas.on('mouse:wheel', (opt: any) => {
-          const delta = opt.e.deltaY;
-          let zoom = canvas.getZoom();
-          if (delta > 0) {
-            zoom -= 0.01;
-          } else {
-            zoom += 0.01;
-          }
-
-          canvas.zoomToPoint(
-            new fabric.Point(canvas.getCenter().left, canvas.getCenter().top),
-            zoom,
-          );
-          opt.e.preventDefault();
-          opt.e.stopPropagation();
-        });
+      modified: (opt) => {
+        onModified(opt.target);
       },
-      mousedown: () => {
+      mousedown: (opt) => {
         if (onSelect) {
-          canvas.on('mouse:down', (opt) => {
-            onSelect(opt.target);
-          });
+          onSelect(opt.target);
         }
       },
       resize: (currentWidth, currentHeight, nextWidth, nextHeight) => {
@@ -338,12 +311,15 @@ const Canvas = forwardRef(
           hoverCursor: 'default',
         }),
       );
+
+      localCanvas.on({
+        'object:modified': events.modified,
+        'mouse:down': events.mousedown,
+      });
+
       initCanvas(localCanvas);
 
       // canvas.setShadow('2px 3px 3px  rgba(0,0,0,0.15)');
-
-      // events.mousewheel();
-      // events.mousedown();
     }, []);
 
     /*

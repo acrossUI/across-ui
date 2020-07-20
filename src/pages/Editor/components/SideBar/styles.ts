@@ -4,22 +4,13 @@ export const Container = styled.div`
   background: ${(props) => props.theme.secondary};
   height: 100%;
   min-width: 230px;
-`;
 
-export const Section = styled.div`
-  margin-top: 70px;
-  display: flex;
-  flex-direction: column;
-  padding-left: 16px;
-  margin-right: 16px;
-`;
-
-export const SectionTitle = styled.span`
-  font-weight: 800;
-  font-size: 12px;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  color: ${(props) => props.theme.sectionTitle};
+  .ant-collapse-header {
+    background: ${(props) => props.theme.secondary};
+  }
+  .ant-collapse-content-active {
+    padding: 0 10px;
+  }
 `;
 
 export const SubSection = styled.div`
@@ -27,6 +18,11 @@ export const SubSection = styled.div`
   flex-direction: column;
   flex: 1;
   margin-top: 20px;
+
+  /* Row */
+  > div {
+    justify-content: space-between;
+  }
 `;
 
 export const SubSectionTitle = styled.span`
@@ -66,8 +62,7 @@ export const Row = styled.div`
   flex-direction: row;
 `;
 
-export const Separator = styled.div`
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  margin-top: 4px;
-  width: 100%;
+export const Col = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
