@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { forEach } from 'lodash';
 import SideBar from './components/SideBar';
 import SideToolBar from './components/SideToolBar';
 import TopBar from './components/TopBar';
@@ -12,7 +13,6 @@ import { Container, Wrapper, Content, PaperBoard } from './styles';
 export default () => {
   const canvasRef = useRef(null);
   const paperBoardRef = useRef(null);
-  const [zoomRatio, setZoomRatio] = useState(1);
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState();
 
@@ -28,11 +28,20 @@ export default () => {
     onSelect: (obj) => {
       // receive selected items from canvasEngine
       setSelectedItem(obj);
-      canvasRef.current.handlers.select(obj);
+      canvasRef.current.handlers.select(obj.id);
     },
     onChange: (obj) => {
       // receive changed fields of sidebar, width, height, angle etc
+      // and set in canvas
       console.log(obj);
+      obj.forEach((el) => {
+        if (el.name[0] === 'angle') {
+          canvasRef.current.handlers.set('angle', el.value);
+        }
+        if (el.name[0] === 'width') {
+          canvasRef.current.handlers.set('width', el.value);
+        }
+      });
     },
     /*
     onRemove: (obj) => {
@@ -67,7 +76,7 @@ export default () => {
               paperBoardRef={paperBoardRef}
               onAdd={handlers.onAddItem}
               // onRemove={(e) => console.log('onRemove ==>', e)}
-              onModified={(e) => {}}
+              onModified={(e) => console.log('modified!!! -->', e)}
               onSelect={handlers.onSelect}
             />
           </PaperBoard>

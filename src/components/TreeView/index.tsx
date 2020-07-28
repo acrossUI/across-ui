@@ -30,6 +30,10 @@ const TreeView = ({
 
     return nodes;
   };
+  const handleSelect = (id) => {
+    const obj = canvasRef.current.handlers.findById(id);
+    return obj;
+  };
 
   const treeData = [
     {
@@ -45,7 +49,7 @@ const TreeView = ({
         showIcon
         defaultExpandedKeys={[1]}
         treeData={treeData}
-        onSelect={(el) => onSelect(el[0])}
+        onSelect={(el) => onSelect(handleSelect(el[0]))}
         switcherIcon={<Icon name="chevronDown" />}
         {...rest}
       />

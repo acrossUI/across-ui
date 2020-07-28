@@ -217,6 +217,7 @@ const Canvas = forwardRef(
         const activeObject = canvas.getActiveObject();
         activeObject.set(key, value);
         activeObject.setCoords();
+        canvas.requestRenderAll();
       },
       setObject: (obj: any) => {
         const activeObject: any = canvas.getActiveObject();
