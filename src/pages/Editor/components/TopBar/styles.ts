@@ -6,3 +6,9 @@ export const Container = styled.div`
   min-height: 38px;
   background: #2a3445;
 `;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 200px;
+`;

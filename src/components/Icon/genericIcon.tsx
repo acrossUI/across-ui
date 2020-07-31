@@ -90,3 +90,33 @@ export const frame = () => (
     <rect x="4" y="4" width="8" height="8" stroke="#E1E2EA" strokeWidth="2" />
   </svg>
 );
+
+export const curvedArrowLeft = () => (
+  <svg width="17" height="16" viewBox="0 0 17 16" fill="none">
+    <g clipPath="url(#clip0)">
+      <path
+        d="M0.0116057 6.31828L6.20203 10.9867L6.2053 8.53969C10.4644 8.14096 14.5512 9.75843 16.001 14.1933C16.0247 8.49092 11.2814 5.2535 6.21117 4.15513L6.2145 1.66642L0.0116057 6.31828Z"
+        fill="#E1E2EA"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0">
+        <rect
+          width="16"
+          height="15.83"
+          fill="white"
+          transform="matrix(-0.999999 -0.00133822 -0.00133822 0.999999 16.0201 0.0214233)"
+        />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+export const curvedArrowRight = () => (
+  <svg width="17" height="16" viewBox="0 0 17 16" fill="none">
+    <path
+      d="M16.0133 5.91654L9.80872 11.8033L9.81287 8.70785C5.55498 8.19055 1.4633 10.2243 3.54759e-05 15.83C-0.00632099 8.6164 4.74678 4.53543 9.82029 3.16136L9.8245 0.0131191L16.0133 5.91654Z"
+      fill="#E1E2EA"
+    />
+  </svg>
+);

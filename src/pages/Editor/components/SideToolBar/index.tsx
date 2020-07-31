@@ -128,6 +128,7 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
       {SHAPE.map((el) => (
         <Icon
           name={el.icon}
+          mode="overlayed"
           style={{ marginTop: 10 }}
           onClick={() => handlers.onAddItem(el)}
         />

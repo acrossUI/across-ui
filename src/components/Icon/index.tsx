@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from '@ant-design/icons';
-
+import { Overlay } from './styles';
 import * as genericIcon from './genericIcon';
 
 interface IconProps {
@@ -9,15 +9,33 @@ interface IconProps {
   color?: string;
   onClick?: () => void;
   style?: any;
+  mode?: 'default' | 'overlayed';
 }
 
-const CustomIcon = ({ name, size, color, onClick, ...rest }: IconProps) => {
-  return <Icon component={genericIcon[name]} {...rest} onClick={onClick} />;
+const CustomIcon = ({
+  name,
+  size,
+  color,
+  onClick,
+  mode,
+  ...rest
+}: IconProps) => {
+  return (
+    <Overlay {...{ mode }}>
+      <Icon
+        component={genericIcon[name]}
+        {...rest}
+        onClick={onClick}
+        style={{ margin: 'auto' }}
+      />
+    </Overlay>
+  );
 };
 
 CustomIcon.defaultProps = {
   size: 18,
   color: 'red',
+  mode: 'default',
 };
 
 export default CustomIcon;

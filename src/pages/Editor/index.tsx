@@ -33,14 +33,11 @@ export default () => {
     onChange: (obj) => {
       // receive changed fields of sidebar, width, height, angle etc
       // and set in canvas
+
+      console.log(obj);
       console.log(obj);
       obj.forEach((el) => {
-        if (el.name[0] === 'angle') {
-          canvasRef.current.handlers.set('angle', el.value);
-        }
-        if (el.name[0] === 'width') {
-          canvasRef.current.handlers.set('width', el.value);
-        }
+        canvasRef.current.handlers.set(el.name[0], el.value);
       });
     },
     /*
