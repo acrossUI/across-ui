@@ -7,6 +7,7 @@ import FooterToolBar from './components/FooterToolbar';
 import TreeView from '../../components/TreeView';
 import CanvasEngine from '../../components/CanvasEngine';
 import Icon from '../../components/Icon';
+import BlurScreen from '../../components/BlurScreen';
 
 import { Container, Wrapper, Content, PaperBoard } from './styles';
 
@@ -33,11 +34,14 @@ export default () => {
     onChange: (obj) => {
       // receive changed fields of sidebar, width, height, angle etc
       // and set in canvas
-
-      console.log(obj);
-      console.log(obj);
       obj.forEach((el) => {
-        canvasRef.current.handlers.set(el.name[0], el.value);
+        if (el.name[0] === 'width') {
+          return canvasRef.current.handlers.set(
+            'scaleX',
+            selectedItem.scaleX * el.value,
+          );
+        }
+        return canvasRef.current.handlers.set(el.name[0], el.value);
       });
     },
     /*
@@ -57,6 +61,7 @@ export default () => {
 
   return (
     <Container>
+      <BlurScreen />
       <TopBar />
       <Wrapper>
         <SideToolBar canvasRef={canvasRef} />
