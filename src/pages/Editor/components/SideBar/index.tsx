@@ -21,8 +21,8 @@ const SideBar = ({ onChange, selectedItem }: any) => {
       formRef.current.setFieldsValue({
         width: selectedItem.width * selectedItem.scaleX,
         height: selectedItem.height * selectedItem.scaleY,
-        x: selectedItem.left,
-        y: selectedItem.top,
+        left: selectedItem.left,
+        top: selectedItem.top,
         angle: selectedItem.angle,
       });
     }
@@ -51,14 +51,14 @@ const SideBar = ({ onChange, selectedItem }: any) => {
                 <Form.Item
                   style={defaultInputStyle}
                   label={<InputTitle>x</InputTitle>}
-                  name="x"
+                  name="left"
                 >
                   <Input />
                 </Form.Item>
                 <Form.Item
                   style={defaultInputStyle}
                   label={<InputTitle>y</InputTitle>}
-                  name="y"
+                  name="top"
                 >
                   <Input />
                 </Form.Item>

@@ -269,6 +269,17 @@ const Canvas = forwardRef(
           canvas.requestRenderAll();
         }
       },
+      scaleToResize: (width, height) => {
+        const activeObject = handlers.getActiveObject() as any;
+        const obj = {
+          id: activeObject.id,
+          scaleX: width / activeObject.width,
+          scaleY: height / activeObject.height,
+        };
+        handlers.setObject(obj);
+        activeObject.setCoords();
+        canvas.requestRenderAll();
+      },
     };
 
     const events = {

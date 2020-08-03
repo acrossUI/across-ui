@@ -27,21 +27,24 @@ export default () => {
       setItems([...items, obj]);
     },
     onSelect: (obj) => {
-      // receive selected items from canvasEngine
-      setSelectedItem(obj);
-      canvasRef.current.handlers.select(obj.id);
+      if (obj) {
+        // receive selected items from canvasEngine
+        setSelectedItem(obj);
+        canvasRef.current.handlers.select(obj.id);
+      }
     },
-    onChange: (obj) => {
+    onChange: (changedFields, allFields): any => {
       // receive changed fields of sidebar, width, height, angle etc
       // and set in canvas
-      obj.forEach((el) => {
-        if (el.name[0] === 'width') {
-          return canvasRef.current.handlers.set(
-            'scaleX',
-            selectedItem.scaleX * el.value,
+      changedFields.forEach((changed) => {
+        if (changed.name[0] === 'width' || changed.name[0] === 'height') {
+          return canvasRef.current.handlers.scaleToResize(
+            allFields.find((field: any) => field.name[0] === 'width').value,
+            allFields.find((field: any) => field.name[0] === 'height').value,
           );
         }
-        return canvasRef.current.handlers.set(el.name[0], el.value);
+
+        return canvasRef.current.handlers.set(changed.name[0], changed.value);
       });
     },
     /*
