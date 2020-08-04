@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Form, Input, Slider, Collapse, Col, Row } from 'antd';
-
+import { Form, Input, Slider, Collapse, Col, Row, Divider } from 'antd';
+import ColorPicker from '../../../../components/ColorPicker';
 import Icon from '../../../../components/Icon';
 import {
   Container,
@@ -54,7 +54,7 @@ const SideBar = ({ onChange, selectedItem }: any) => {
                   label={<InputTitle>x</InputTitle>}
                   name="left"
                 >
-                  <Input />
+                  <Input type="number" />
                 </Form.Item>
                 <Form.Item
                   style={defaultInputStyle}
@@ -89,6 +89,9 @@ const SideBar = ({ onChange, selectedItem }: any) => {
                 >
                   <Slider min={0} max={360} style={{ width: '130px' }} />
                 </Form.Item>
+              </Row>
+              <Row>
+                <ColorPicker />
               </Row>
             </SubSection>
           </Collapse.Panel>

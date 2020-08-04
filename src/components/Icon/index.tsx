@@ -21,11 +21,10 @@ const CustomIcon = ({
   ...rest
 }: IconProps) => {
   return (
-    <Overlay {...{ mode }}>
+    <Overlay {...{ mode }} onClick={onClick}>
       <Icon
         component={genericIcon[name]}
         {...rest}
-        onClick={onClick}
         style={{ margin: 'auto' }}
       />
     </Overlay>
