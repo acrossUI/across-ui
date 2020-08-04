@@ -3,12 +3,21 @@ import { Popover, Button } from 'antd';
 import { ChromePicker } from 'react-color';
 import { PickerInput } from './styles';
 
-const ColorPicker: React.FC = () => {
-  const [color, setColor] = useState({ hex: '#FFFF' });
+interface ColorPickerProps {
+  onChange?: Function;
+}
+
+const ColorPicker = ({ onChange }: ColorPickerProps) => {
+  const [color, setColor] = useState('#FFFF');
+
+  const handleChange = (newColor) => {
+    setColor(newColor.hex);
+    onChange(newColor.hex);
+  };
 
   const Picker = (
     <div>
-      <ChromePicker color={color} onChange={(newColor) => setColor(newColor)} />
+      <ChromePicker color={color} onChange={handleChange} />
     </div>
   );
 
@@ -19,9 +28,9 @@ const ColorPicker: React.FC = () => {
       style={{ border: '30px solid red' }}
       trigger="click"
     >
-      <PickerInput color={color.hex}>
+      <PickerInput color={color}>
         <div>
-          <span>{color.hex}</span>
+          <span>{color}</span>
         </div>
       </PickerInput>
     </Popover>

@@ -36,6 +36,7 @@ export default () => {
     onChange: (changedFields, allFields): any => {
       // receive changed fields of sidebar, width, height, angle etc
       // and set in canvas
+      console.log(JSON.stringify(changedFields));
       changedFields.forEach((changed) => {
         if (changed.name[0] === 'width' || changed.name[0] === 'height') {
           return canvasRef.current.handlers.scaleToResize(

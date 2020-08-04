@@ -91,7 +91,13 @@ const SideBar = ({ onChange, selectedItem }: any) => {
                 </Form.Item>
               </Row>
               <Row>
-                <ColorPicker />
+                <Form.Item
+                  style={defaultInputStyle}
+                  label={<InputTitle>Color</InputTitle>}
+                  name="fill"
+                >
+                  <ColorPicker />
+                </Form.Item>
               </Row>
             </SubSection>
           </Collapse.Panel>
