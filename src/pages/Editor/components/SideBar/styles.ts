@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import SimpleBar from 'simplebar-react';
 
-export const Container = styled.div`
+export const Container = styled(SimpleBar)`
   background: ${(props) => props.theme.secondary};
   height: 100%;
   min-width: 230px;

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Form, Input, Slider, Collapse, Col, Row } from 'antd';
+
 import Icon from '../../../../components/Icon';
 import {
   Container,
@@ -117,6 +118,7 @@ const SideBar = ({ onChange, selectedItem }: any) => {
               </Row>
             </SubSection>
           </Collapse.Panel>
+          <Collapse.Panel header="PAGE" key="3" />
         </Collapse>
       </Form>
     </Container>

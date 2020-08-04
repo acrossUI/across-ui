@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'simplebar/dist/simplebar.min.css';
 // variables to override above
 export default createGlobalStyle`
 
@@ -24,5 +25,8 @@ button: {
     cursor: pointer;
   }
 
+.simplebar-scrollbar::before {
+  background-color: #464969;
+}
 
 `;

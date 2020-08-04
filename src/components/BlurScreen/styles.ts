@@ -16,7 +16,7 @@ export const Container = styled.div`
     margin-top: 30%;
     font-weight: bold;
     text-align: center;
-    color: ##fff;
+    color: #fff;
   }
 
   @media (min-width: 1200px) {
