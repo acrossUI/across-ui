@@ -25,6 +25,7 @@ const SideBar = ({ onChange, selectedItem }: any) => {
         left: selectedItem.left,
         top: selectedItem.top,
         angle: selectedItem.angle,
+        fill: selectedItem.fill,
       });
     }
   }, [selectedItem]);
