@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Awe Designer",
+  "name": "A report Designer for Ruby and Python",
   "icons": [
     {
       "src": "favicon.ico",
