@@ -10,6 +10,12 @@ interface SideToolBarProps {
 }
 
 const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
+  const defaultObjAttribs = {
+    cornerColor: '#858FFF',
+    cornerSize: 6,
+    transparentCorners: false,
+    borderColor: '#858FFF',
+  };
   const SHAPE = [
     {
       key: 'default-line',
@@ -52,6 +58,7 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
         strokeUniform: true,
         originX: 'center',
         originY: 'center',
+        stroke: 2,
         name: 'New shape',
       },
     },
@@ -68,6 +75,7 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
         originY: 'center',
         noScaleCache: false,
         strokeUniform: true,
+        stroke: 2,
         name: 'New shape',
       },
     },
@@ -81,6 +89,7 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
         originX: 'center',
         originY: 'center',
         fill: 'transparent',
+        stroke: 2,
         name: 'New shape',
       },
     },

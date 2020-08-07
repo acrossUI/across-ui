@@ -17,7 +17,7 @@ export const FabricContext = createContext<FabContext>([null, () => {}]);
  */
 
 // prettier-ignore
-export const FabricContextProvider = ({ children }: { children: JSX.Element }): JSX.Element => {
+export const FabricContextProvider = ({ children }: { children: JSX.Element }) => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
 
   const initCanvas = (c: fabric.Canvas): void => {

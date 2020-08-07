@@ -10,7 +10,7 @@ import { v4 } from 'uuid';
 
 // import difference from 'lodash/difference';
 import { fabric } from 'fabric';
-import { FabricContext } from '../../context/fabricContext';
+import { FabricContext } from '../../hooks/fabricContext';
 
 const FabricObject = {
   itext: {
@@ -80,6 +80,16 @@ const Canvas = forwardRef(
       defaultCursor: 'default',
       backgroundColor: '#f3f3f3',
     };
+
+    // set a default attributes for canvas
+    fabric.Object.prototype.set({
+      cornerColor: '#858FFF',
+      borderColor: '#858FFF',
+      cornerSize: 8,
+      transparentCorners: false,
+
+      cornerStyle: 'circle',
+    });
 
     const handlers = {
       add: (obj) => {
