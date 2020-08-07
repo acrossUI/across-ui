@@ -15,6 +15,6 @@ const app = firebase.initializeApp({
 });
 // Initialize Firebase
 
-firebase.analytics();
+//firebase.analytics();
 
 export default app;

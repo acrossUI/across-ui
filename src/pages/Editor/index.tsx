@@ -11,7 +11,7 @@ import BlurScreen from '../../components/BlurScreen';
 
 import { Container, Wrapper, Content, PaperBoard } from './styles';
 
-export default () => {
+const Editor = () => {
   const canvasRef = useRef(null);
   const paperBoardRef = useRef(null);
   const [items, setItems] = useState([]);
@@ -99,3 +99,5 @@ export default () => {
     </Container>
   );
 };
+
+export default Editor;

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { FabricContextProvider } from './hooks/fabricContext';
-import { AuthProvider } from './hooks/authContext';
+import { AuthProvider } from './hooks/auth';
 import Routes from './routes';
 
 import dark from './pages/themes/dark';
