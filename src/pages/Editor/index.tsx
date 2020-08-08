@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { forEach } from 'lodash';
 import SideBar from './components/SideBar';
 import SideToolBar from './components/SideToolBar';
-import TopBar from './components/TopBar';
+import Header from './components/Header';
 import FooterToolBar from './components/FooterToolbar';
 import TreeView from '../../components/TreeView';
 import CanvasEngine from '../../components/CanvasEngine';
@@ -65,7 +65,7 @@ const Editor = () => {
   return (
     <Container>
       <BlurScreen />
-      <TopBar />
+      <Header />
       <Wrapper>
         <SideToolBar canvasRef={canvasRef} />
         <TreeView

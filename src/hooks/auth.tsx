@@ -5,7 +5,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-
+import { notification } from 'antd';
 import app from '../config/firebase';
 
 interface SignInCredentialsProps {
@@ -16,6 +16,7 @@ interface SignInCredentialsProps {
 interface AuthContextProps {
   currentUser: any;
   signIn(credentials: SignInCredentialsProps): Promise<void>;
+  signOut(): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
@@ -30,15 +31,45 @@ export const AuthProvider = ({children}: { children: JSX.Element}) => {
 
   // signin
   const signIn = useCallback(async ({ email, password }): Promise<void> => {
-    await app
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .catch((err) => console.log(`---> ${err}`));
+
+    try {
+      await app
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+    } catch (err) {
+
+        notification.open({
+          message: err.code,
+          description: err.message,
+          onClick: () => {
+            console.log('Notification Clicked!');
+          },
+        });
+
+
+    }
+  },[])
+
+
+  // signout
+  const signOut = useCallback(async () => {
+    try {
+      await app
+      .auth().signOut().then(() => {
+       console.log('signed out sucessfully')
+      })
+    } catch (error) {
+      alert(error);
+    }
+
+
+
+
   },[])
 
 
   return (
-    <AuthContext.Provider value={{ currentUser, signIn}}>
+    <AuthContext.Provider value={{ currentUser, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )

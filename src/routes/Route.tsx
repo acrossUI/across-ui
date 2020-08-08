@@ -5,6 +5,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 
+import { setTimeout } from 'timers';
 import { useAuth } from '../hooks/auth';
 
 interface RouteProps extends ReactDOMRouteProps {
@@ -18,7 +19,6 @@ const Route: React.FC<RouteProps> = ({
   ...rest
 }) => {
   const { currentUser } = useAuth();
-  console.log(currentUser);
 
   return (
     <ReactDOMRoute
