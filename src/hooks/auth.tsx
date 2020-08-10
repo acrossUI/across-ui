@@ -37,7 +37,6 @@ export const AuthProvider = ({children}: { children: JSX.Element}) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
     } catch (err) {
-
         notification.open({
           message: err.code,
           description: err.message,
@@ -45,9 +44,7 @@ export const AuthProvider = ({children}: { children: JSX.Element}) => {
             console.log('Notification Clicked!');
           },
         });
-
-
-    }
+    } // endCatch
   },[])
 
 

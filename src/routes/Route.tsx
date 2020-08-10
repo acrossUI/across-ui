@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Route as ReactDOMRoute,
   RouteProps as ReactDOMRouteProps,
@@ -19,6 +19,20 @@ const Route: React.FC<RouteProps> = ({
   ...rest
 }) => {
   const { currentUser } = useAuth();
+  /*
+  setTimeout(() => {
+    currentUser.updateProfile({
+      displayName: 'João Carlos',
+      photoURL:
+        'https://avatars3.githubusercontent.com/u/3996742?s=460&u=9361410846b3771effb5b719a2abe5cfec43200f&v=4',
+    });
+  }, 3000);
+*/
+  useEffect(() => {
+    return () => {
+      console.log('rendered!!!!!');
+    };
+  }, []);
 
   return (
     <ReactDOMRoute
@@ -27,7 +41,7 @@ const Route: React.FC<RouteProps> = ({
         return isPrivate === !!currentUser ? (
           <Component />
         ) : (
-          <Redirect to={{ pathname: isPrivate ? '/' : '/app' }} />
+          <Redirect to={{ pathname: isPrivate ? '/' : '/projects' }} />
         );
       }}
     />

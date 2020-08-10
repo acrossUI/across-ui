@@ -1,8 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { Form, Input, Button, notification } from 'antd';
+import React, { useEffect, useState, useRef } from 'react';
+import { Form, Input, Button, Spin } from 'antd';
+import { Link } from 'react-router-dom';
 import app from '../../../config/firebase';
 import { useAuth } from '../../../hooks/auth';
 import macbookImg from '../../../assets/img/macbook.png';
+import githubImg from '../../../assets/img/githubImg.svg';
+import googleImg from '../../../assets/img/googleImg.svg';
+import facebookImg from '../../../assets/img/facebookImg.svg';
 
 import Icon from '../../../components/Icon';
 
@@ -13,15 +17,22 @@ import {
   BannerContent,
   BlurOverlay,
   FormWraper,
+  SocialIconsWrapper,
+  SignupLink,
+  SocialIconsDescription,
 } from './styles';
 
 const SignIn: React.FC = () => {
-  const { signIn } = useAuth();
+  const { currentUser, signIn } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const formRef = useRef(null);
 
   const onFinish = (values) => {
-    signIn({ email: values.email, password: values.password });
+    setLoading(true);
+    signIn({ email: values.email, password: values.password }).then(() => {
+      setLoading(false);
+    });
   };
   return (
     <Container>
@@ -66,11 +77,34 @@ const SignIn: React.FC = () => {
                 type="primary"
                 size="large"
                 htmlType="submit"
+                loading={loading}
               >
-                SignIn
+                {loading ? null : 'SignIn'}
               </Button>
             </Form.Item>
           </Form>
+          <SocialIconsDescription>
+            <div />
+            <span>or continue with</span>
+            <div />
+          </SocialIconsDescription>
+          <SocialIconsWrapper>
+            <a href="">
+              <img src={githubImg} alt="" />
+            </a>
+
+            <a href="">
+              <img src={googleImg} alt="" />
+            </a>
+            <a href="">
+              <img src={facebookImg} alt="" />
+            </a>
+          </SocialIconsWrapper>
+
+          <SignupLink>
+            <span>Don’t have a account yet?</span>
+            <Link to="/signup">Click here to SignUp</Link>
+          </SignupLink>
         </FormWraper>
       </AuthContainer>
     </Container>

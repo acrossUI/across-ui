@@ -33,6 +33,10 @@ export const BannerWrapper = styled.div`
   background-image: url(${containerBackground});
   background-repeat: no-repeat;
   background-size: contain;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 `;
 
 export const BannerContent = styled.div`
@@ -66,6 +70,54 @@ export const BlurOverlay = styled.div`
 
 export const FormWraper = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   margin: 68px 40px 0;
+`;
+
+export const SocialIconsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 16px 0;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #33354a;
+    height: 62px;
+    width: 62px;
+    border-radius: 50%;
+  }
+
+  a + a {
+    margin-left: 30px;
+  }
+`;
+
+export const SignupLink = styled.div`
+  display: flex;
+  margin: auto 0 40px;
+
+  a {
+    margin-left: 4px;
+  }
+`;
+
+export const SocialIconsDescription = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0;
+
+  div {
+    width: 80px;
+    height: 0;
+    border: 0.1px solid #e1e2ea;
+  }
+
+  span {
+    margin: 0 20px;
+  }
 `;

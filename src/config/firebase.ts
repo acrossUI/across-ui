@@ -2,6 +2,7 @@ import * as firebase from 'firebase/app';
 /* eslint-disable */
 import 'firebase/auth';
 import 'firebase/analytics';
+import 'firebase/firestore';
 
 const app = firebase.initializeApp({
   apiKey: 'AIzaSyBStdQZq4JHOdJEY9TvKgYuiVvUE3UxNlc',

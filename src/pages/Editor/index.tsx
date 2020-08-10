@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { forEach } from 'lodash';
+import { withRouter } from 'react-router-dom';
 import SideBar from './components/SideBar';
 import SideToolBar from './components/SideToolBar';
 import Header from './components/Header';
@@ -11,7 +11,7 @@ import BlurScreen from '../../components/BlurScreen';
 
 import { Container, Wrapper, Content, PaperBoard } from './styles';
 
-const Editor = () => {
+const Editor = (props) => {
   const canvasRef = useRef(null);
   const paperBoardRef = useRef(null);
   const [items, setItems] = useState([]);
@@ -62,6 +62,10 @@ const Editor = () => {
     */
   };
 
+  useEffect(() => {
+    console.log(props);
+  }, []);
+
   return (
     <Container>
       <BlurScreen />
@@ -100,4 +104,4 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+export default withRouter(Editor);
