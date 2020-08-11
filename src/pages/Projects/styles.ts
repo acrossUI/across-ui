@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 
   .ant-spin {
     position: absolute;
@@ -16,4 +17,19 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   margin: 40px 120px;
   max-width: 85%;
+`;
+
+export const AddProject = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 140px;
+  width: 140px;
+  border-radius: 14px;
+  background-color: #1a2434;
+
+  h1 {
+    font-size: 42px;
+  }
 `;

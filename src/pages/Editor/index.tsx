@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import SideBar from './components/SideBar';
 import SideToolBar from './components/SideToolBar';
 import Header from './components/Header';
@@ -8,6 +8,7 @@ import TreeView from '../../components/TreeView';
 import CanvasEngine from '../../components/CanvasEngine';
 import Icon from '../../components/Icon';
 import BlurScreen from '../../components/BlurScreen';
+import app from '../../config/firebase';
 
 import { Container, Wrapper, Content, PaperBoard } from './styles';
 
@@ -16,6 +17,8 @@ const Editor = (props) => {
   const paperBoardRef = useRef(null);
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState();
+  const history = useHistory() as any;
+  const db = app.firestore();
 
   const handlers = {
     onAddItem: (obj) => {
@@ -47,7 +50,12 @@ const Editor = (props) => {
         return canvasRef.current.handlers.set(changed.name[0], changed.value);
       });
     },
-    /*
+    onModified: (obj) => {
+      db.collection('projects')
+        .doc(history.location.state.projectDocID)
+        .update({ reportData: canvasRef.current.handlers.saveToJSON() });
+
+      /*
     onRemove: (obj) => {
       delete this.state.items[obj.id];
       this.setState(
@@ -60,10 +68,18 @@ const Editor = (props) => {
       );
     },
     */
+    },
   };
 
   useEffect(() => {
-    console.log(props);
+    console.log(history.location.state.projectDocID);
+    db.collection('projects')
+      .doc(history.location.state.projectDocID)
+      .get()
+      .then((doc) => {
+        console.log(doc.data().reportData);
+        canvasRef.current.handlers.loadJSON(doc.data().reportData);
+      });
   }, []);
 
   return (
@@ -85,7 +101,7 @@ const Editor = (props) => {
               paperBoardRef={paperBoardRef}
               onAdd={handlers.onAddItem}
               // onRemove={(e) => console.log('onRemove ==>', e)}
-              onModified={(e) => console.log('modified!!! -->', e)}
+              onModified={(obj) => handlers.onModified(obj)}
               onSelect={handlers.onSelect}
             />
           </PaperBoard>

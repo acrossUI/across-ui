@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { Card, Row, Col, Spin } from 'antd';
-
+import { useHistory } from 'react-router-dom';
+import { Card, Row, Col, Spin, Modal, Form, Input } from 'antd';
+import { v4 as uuid } from 'uuid';
 import {
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
+import Icon from '../../components/Icon';
 
 import app from '../../config/firebase';
-import { Container, Wrapper } from './styles';
+import { Container, Wrapper, AddProject } from './styles';
 import { useAuth } from '../../hooks/auth';
 
 const Projects: React.FC = () => {
@@ -17,38 +18,63 @@ const Projects: React.FC = () => {
   const { currentUser } = useAuth();
   const history = useHistory();
   const [loading, setLoading] = useState(true);
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState();
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [form] = Form.useForm();
+  const db = app.firestore();
 
-  useEffect(() => {
+  const loadProjects = () => {
     setLoading(true);
-    const db = app.firestore();
+
     const localProjects = [];
     db.collection('projects')
+      .where('userID', '==', currentUser.uid)
       .get()
       .then((snapshot) =>
-        snapshot.docs.map((doc) => localProjects.push(doc.data())),
+        snapshot.docs.map((doc) =>
+          localProjects.push({ id: doc.id, data: doc.data() }),
+        ),
       )
-      .then(() => setProjects(localProjects))
+      .then(() => setProjects(localProjects as any))
       .then(() => setLoading(false));
+  };
 
+  const handleAddProject = () => {
+    setModalVisible(true);
     /*
 
+      */
+  };
+
+  useEffect(() => {
+    loadProjects();
+    db.collection('projects').onSnapshot(() => loadProjects());
+  }, []);
+
+  const onCreate = (values) => {
     db.collection('projects')
       .doc()
       .set({
-        userId: currentUser.uid,
-        name: 'Test Project',
+        projectID: uuid(),
+        userID: currentUser.uid,
+        name: values.title,
         created_at: new Date(),
         modified_at: new Date(),
+        reportData: {
+          version: '3.6.3',
+          objects: [],
+          background: '#f3f3f3',
+        },
       })
       .then(function () {
         console.log('Document successfully written!');
+        setModalVisible(false);
       })
       .catch(function (error) {
         console.error('Error writing document: ', error);
       });
-      */
-  }, []);
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -75,7 +101,7 @@ const Projects: React.FC = () => {
                           key="edit"
                           onClick={() =>
                             history.push('/app', {
-                              projectID: project.projectID,
+                              projectDocID: project.id,
                             })
                           }
                         />,
@@ -84,13 +110,49 @@ const Projects: React.FC = () => {
                       ]}
                     >
                       <Meta
-                        title={project.name}
-                        description={`Last publish: ${project.created_at}`}
+                        title={project.data.name}
+                        description={`Last publish: ${project.data.created_at}`}
                       />
                     </Card>
                   </Col>
                 </>
               ))}
+            <Col
+              span={6}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Modal
+                visible={isModalVisible}
+                title="Create a new Project"
+                okText="Create"
+                cancelText="Cancel"
+                onCancel={() => setModalVisible(false)}
+                onOk={() => {
+                  form
+                    .validateFields()
+                    .then((values) => {
+                      form.resetFields();
+                      onCreate(values);
+                    })
+                    .catch((info) => {
+                      console.log('Validate Failed:', info);
+                    });
+                }}
+              >
+                <Form form={form}>
+                  <Form.Item name="title" label="Title">
+                    <Input placeholder="project title" />
+                  </Form.Item>
+                </Form>
+              </Modal>
+              <AddProject>
+                <Icon name="docAdd" onClick={handleAddProject} />
+              </AddProject>
+            </Col>
           </Row>
         )}
       </Wrapper>
