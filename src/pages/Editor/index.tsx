@@ -71,15 +71,19 @@ const Editor = (props) => {
     },
   };
 
-  useEffect(() => {
-    console.log(history.location.state.projectDocID);
+  const loadCanvasFromFirebase = () => {
     db.collection('projects')
       .doc(history.location.state.projectDocID)
       .get()
       .then((doc) => {
-        console.log(doc.data().reportData);
         canvasRef.current.handlers.loadJSON(doc.data().reportData);
       });
+  };
+  useEffect(() => {
+    loadCanvasFromFirebase();
+    db.collection('projects')
+      .doc(history.location.state.projectDocID)
+      .onSnapshot(() => loadCanvasFromFirebase());
   }, []);
 
   return (

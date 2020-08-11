@@ -28,7 +28,7 @@ const Projects: React.FC = () => {
 
     const localProjects = [];
     db.collection('projects')
-      .where('userID', '==', currentUser.uid)
+      // .where('userID', '==', currentUser.uid) // remove coment to load only user projects
       .get()
       .then((snapshot) =>
         snapshot.docs.map((doc) =>
