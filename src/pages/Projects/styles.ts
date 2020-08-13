@@ -28,8 +28,4 @@ export const AddProject = styled.div`
   width: 140px;
   border-radius: 14px;
   background-color: #1a2434;
-
-  h1 {
-    font-size: 42px;
-  }
 `;

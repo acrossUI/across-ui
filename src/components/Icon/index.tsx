@@ -1,40 +1,44 @@
 import React from 'react';
-import Icon from '@ant-design/icons';
-import { Overlay } from './styles';
-import * as genericIcon from './genericIcon';
+
+import { CSSProperties } from 'styled-components';
+import { Wrapper } from './styles';
 
 interface IconProps {
-  name?: string;
-  size?: number;
+  name: string;
   color?: string;
+  type?: 'solid' | 'regular' | 'light' | 'duotone' | 'brands';
+  size?: number;
+  style?: CSSProperties;
   onClick?: () => void;
-  style?: any;
-  mode?: 'default' | 'overlayed';
 }
 
-const CustomIcon = ({
+const Icon: React.FC<IconProps> = ({
   name,
-  size,
   color,
+  type,
+  size,
+  style,
   onClick,
-  mode,
-  ...rest
-}: IconProps) => {
+}) => {
+  const typeDescriptor = {
+    solid: 'fas', // free
+    regular: 'far', // pro
+    light: 'fal', // pro
+    duotone: 'fad', // pro
+    brands: 'fab', // free
+  };
+
   return (
-    <Overlay {...{ mode }} onClick={onClick}>
-      <Icon
-        component={genericIcon[name]}
-        {...rest}
-        style={{ margin: 'auto' }}
-      />
-    </Overlay>
+    <Wrapper size={size} color={color} onClick={onClick}>
+      <i style={style} className={`${typeDescriptor[type]} fa-${name}`} />
+    </Wrapper>
   );
 };
 
-CustomIcon.defaultProps = {
-  size: 18,
-  color: 'red',
-  mode: 'default',
+Icon.defaultProps = {
+  color: 'white',
+  size: 16,
+  type: 'regular',
 };
 
-export default CustomIcon;
+export default Icon;

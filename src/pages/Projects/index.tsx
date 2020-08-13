@@ -150,7 +150,7 @@ const Projects: React.FC = () => {
                 </Form>
               </Modal>
               <AddProject>
-                <Icon name="docAdd" onClick={handleAddProject} />
+                <Icon name="plus" onClick={handleAddProject} size={42} />
               </AddProject>
             </Col>
           </Row>

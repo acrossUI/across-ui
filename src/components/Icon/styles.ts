@@ -1,19 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-export const Overlay = styled.div`
-  cursor: pointer;
-  ${(props: any) =>
-    props.mode === 'overlayed' &&
-    css`
-      display: flex;
-      background: #344157;
-      height: 32px;
-      width: 32px;
-      border-radius: 50%;
-      margin: 5px 0;
-
-      &:hover {
-        background: #858fff;
-      }
-    `}
+export const Wrapper = styled.span<any>`
+  color: ${(props) => props.color};
+  font-size: ${(props) => props.size}px;
 `;

@@ -6,6 +6,15 @@ import { useAuth } from '../../../../hooks/auth';
 
 const Header: React.FC = ({ canvasRef }: any) => {
   const { currentUser, signOut } = useAuth();
+  /*
+  setTimeout(() => {
+    currentUser.updateProfile({
+      displayName: 'Pedrão',
+      photoURL:
+        'https://ca.slack-edge.com/T0261DERU-U0W6XH605-eccc0a672ece-512',
+    });
+  }, 1000);
+  */
 
   const ProfileMenu = () => (
     <Menu>
@@ -20,8 +29,8 @@ const Header: React.FC = ({ canvasRef }: any) => {
   return (
     <Container>
       <Wrapper>
-        <Icon name="curvedArrowLeft" mode="overlayed" />
-        <Icon name="curvedArrowRight" mode="overlayed" />
+        <Icon name="undo" type="duotone" />
+        <Icon name="redo" type="duotone" />
       </Wrapper>
       <RightWrapper>
         <Profile>

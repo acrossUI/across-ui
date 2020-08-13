@@ -9,7 +9,6 @@ import {
   InputWrapper,
   InputTitle,
 } from './styles';
-import { chevronDown } from '../../../../components/Icon/genericIcon';
 
 const SideBar = ({ onChange, selectedItem }: any) => {
   const defaultInputStyle = {
@@ -43,7 +42,10 @@ const SideBar = ({ onChange, selectedItem }: any) => {
         <Collapse
           defaultActiveKey={['1']}
           expandIcon={({ isActive }) => (
-            <Icon name={isActive ? 'chevronDown' : 'chevronRight'} />
+            <Icon
+              name={isActive ? 'chevron-down' : 'chevron-right'}
+              type="duotone"
+            />
           )}
         >
           <Collapse.Panel header="Layout" key="1">

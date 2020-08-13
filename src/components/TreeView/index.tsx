@@ -11,11 +11,11 @@ const TreeView = ({
   ...rest
 }: any) => {
   const canvas2Icon = (item: any) => {
-    if (item.type === 'rect') return 'box';
+    if (item.type === 'rect') return 'square';
     if (item.type === 'textbox') return 'text';
     if (item.type === 'circle') return 'circle';
-    if (item.type === 'rect') return 'box';
-    if (item.type === 'line') return 'line';
+    if (item.type === 'rect') return 'circle';
+    if (item.type === 'line') return 'horizontal-rule';
     if (item.type === 'triangle') return 'triangle';
   };
 
@@ -50,7 +50,7 @@ const TreeView = ({
         defaultExpandedKeys={[1]}
         treeData={treeData}
         onSelect={(el) => onSelect(handleSelect(el[0]))}
-        switcherIcon={<Icon name="chevronDown" />}
+        switcherIcon={<Icon name="chevron-down" />}
         {...rest}
       />
     </Container>

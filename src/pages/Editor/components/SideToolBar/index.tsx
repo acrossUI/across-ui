@@ -20,7 +20,7 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
     {
       key: 'default-line',
       type: 'line',
-      icon: 'line',
+      icon: 'horizontal-rule',
       title: 'Line',
       option: {
         name: 'New line',
@@ -65,7 +65,7 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
     {
       key: 'default-box',
       type: 'rect',
-      icon: 'box',
+      icon: 'square',
       title: 'Box',
       option: {
         width: 40,
@@ -132,25 +132,25 @@ const SideToolBar = ({ canvasRef }: SideToolBarProps) => {
   return (
     <Container>
       {SHAPE.map((el) => (
-        <Icon
-          name={el.icon}
-          mode="overlayed"
+        <Button
+          type="dashed"
           style={{ marginTop: 10 }}
           onClick={() => handlers.onAddItem(el)}
+          icon={<Icon name={el.icon} />}
         />
       ))}
       <ButtonsWrapper>
         <Button
           type="dashed"
           onClick={() => handlers.onJsonUpload()}
-          icon={<FolderOpenOutlined />}
+          icon={<Icon name="folder-open" />}
         />
         <Button
           type="dashed"
           onClick={() =>
             handlers.onJsonDownload(canvasRef.current.handlers.saveToJSON())
           }
-          icon={<SaveOutlined />}
+          icon={<Icon name="cloud-download" />}
         />
       </ButtonsWrapper>
     </Container>

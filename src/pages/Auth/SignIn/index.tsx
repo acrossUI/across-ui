@@ -57,7 +57,7 @@ const SignIn: React.FC = () => {
           >
             <Form.Item name="email">
               <Input
-                prefix={<Icon name="mail" />}
+                prefix={<Icon name="envelope" type="duotone" />}
                 size="large"
                 type="email"
                 placeholder="email"
@@ -65,7 +65,7 @@ const SignIn: React.FC = () => {
             </Form.Item>
             <Form.Item name="password">
               <Input
-                prefix={<Icon name="padlock" />}
+                prefix={<Icon name="lock" type="duotone" />}
                 size="large"
                 type="password"
                 placeholder="password"
@@ -79,7 +79,16 @@ const SignIn: React.FC = () => {
                 htmlType="submit"
                 loading={loading}
               >
-                {loading ? null : 'SignIn'}
+                {loading ? null : (
+                  <span>
+                    Signin
+                    <Icon
+                      style={{ marginLeft: 8 }}
+                      name="sign-in"
+                      type="duotone"
+                    />
+                  </span>
+                )}
               </Button>
             </Form.Item>
           </Form>
@@ -90,20 +99,20 @@ const SignIn: React.FC = () => {
           </SocialIconsDescription>
           <SocialIconsWrapper>
             <a href="">
-              <img src={githubImg} alt="" />
+              <Icon name="facebook" type="brands" size={24} />
             </a>
 
             <a href="">
-              <img src={googleImg} alt="" />
+              <Icon name="google" type="brands" size={24} />
             </a>
             <a href="">
-              <img src={facebookImg} alt="" />
+              <Icon name="github" type="brands" size={24} />
             </a>
           </SocialIconsWrapper>
 
           <SignupLink>
             <span>Don’t have a account yet?</span>
-            <Link to="/signup">Click here to SignUp</Link>
+            <Link to="/signup">Click here to SignUp </Link>
           </SignupLink>
         </FormWraper>
       </AuthContainer>
