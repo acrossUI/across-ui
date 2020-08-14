@@ -36,7 +36,7 @@ const Icon: React.FC<IconProps> = ({
 };
 
 Icon.defaultProps = {
-  color: 'white',
+  color: '#f4ede8',
   size: 16,
   type: 'regular',
 };
