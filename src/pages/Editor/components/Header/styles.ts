@@ -8,10 +8,24 @@ export const Container = styled.div`
   background: #2a3445;
 `;
 
+export const Settings = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 100%;
+  transition: background 0.2s;
+
+  &:hover {
+    cursor: pointer;
+    background: #33354a;
+  }
+`;
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  margin-left: 200px;
+  margin-left: 8px;
 `;
 
 export const RightWrapper = styled.div`
@@ -47,4 +61,31 @@ export const Profile = styled.div`
 export const Menu = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const ZoomWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 140px;
+  margin: 0 16px;
+
+  button {
+    border: 0;
+    margin: 0;
+    cursor: pointer;
+    background: transparent;
+    outline: none;
+  }
+
+  small {
+    color: #fff;
+    font-size: 12px;
+  }
+`;
+
+export const UndoRedoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

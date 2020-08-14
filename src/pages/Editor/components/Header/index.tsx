@@ -1,7 +1,16 @@
 import React from 'react';
-import { Popover } from 'antd';
+import { Popover, Input } from 'antd';
 import Icon from '../../../../components/Icon';
-import { Container, Wrapper, RightWrapper, Profile, Menu } from './styles';
+import {
+  Container,
+  Wrapper,
+  RightWrapper,
+  Profile,
+  Menu,
+  Settings,
+  ZoomWrapper,
+  UndoRedoWrapper,
+} from './styles';
 import { useAuth } from '../../../../hooks/auth';
 
 const Header: React.FC = ({ canvasRef }: any) => {
@@ -28,9 +37,28 @@ const Header: React.FC = ({ canvasRef }: any) => {
   );
   return (
     <Container>
+      <Settings>
+        <Icon name="sliders-h" />
+      </Settings>
       <Wrapper>
-        <Icon name="undo" type="duotone" />
-        <Icon name="redo" type="duotone" />
+        <Input
+          onPressEnter={() => console.log('pressebter')}
+          onBlur={() => console.log('pressebter')}
+          value="Relatorio X"
+        />
+        <ZoomWrapper>
+          <button type="button" onClick={() => console.log('cliqued')}>
+            <Icon name="search-minus" />
+          </button>
+          <small>100%</small>
+          <button type="button" onClick={() => console.log('cliqued')}>
+            <Icon name="search-plus" />
+          </button>
+        </ZoomWrapper>
+        <UndoRedoWrapper>
+          <Icon name="undo" />
+          <Icon name="redo" />
+        </UndoRedoWrapper>
       </Wrapper>
       <RightWrapper>
         <Profile>
