@@ -19,3 +19,5 @@ const app = firebase.initializeApp({
 //firebase.analytics();
 
 export default app;
+
+const db = app.firestore();
