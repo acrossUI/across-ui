@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
   ##
   ## OrientDB is the main database Convergence uses to store data.
   ##
@@ -9,9 +8,9 @@ services:
     image: ${CONVERGENCE_DOCKER_REPO}/convergence-orientdb:latest
     # restart: always
     environment:
-      ORIENTDB_ROOT_PASSWORD: "password"
-      ORIENTDB_OPTS_MEMORY: "-Xms384m -Xmx384m"
-      JAVA_OPTS: "-Dstorage.wal.allowDirectIO=false"
+      ORIENTDB_ROOT_PASSWORD: 'password'
+      ORIENTDB_OPTS_MEMORY: '-Xms384m -Xmx384m'
+      JAVA_OPTS: '-Dstorage.wal.allowDirectIO=false'
     volumes:
       - ./data/orientdb/databases:/orientdb/databases
       - ./data/orientdb/backup:/orientdb/backup
@@ -22,12 +21,12 @@ services:
   ##
   cluster-seed:
     image: ${CONVERGENCE_DOCKER_REPO}/convergence-cluster-seed:${CONVERGENCE_DOCKER_TAG}
-    command: "-Dlog4j.configurationFile=/etc/convergence/log4j2.xml"
+    command: '-Dlog4j.configurationFile=/etc/convergence/log4j2.xml'
     # restart: always
     volumes:
-       - ./config/convergence/log4j2.xml:/etc/convergence/log4j2.xml
+      - ./config/convergence/log4j2.xml:/etc/convergence/log4j2.xml
     environment:
-      JAVA_OPTS: "-Xmx64m -Xss512k -XX:CICompilerCount=1 -XX:-TieredCompilation"
+      JAVA_OPTS: '-Xmx64m -Xss512k -XX:CICompilerCount=1 -XX:-TieredCompilation'
       REMOTING_EXTERNAL_HOSTNAME: cluster-seed
       CLUSTER_SEED_NODES: cluster-seed
 
@@ -39,11 +38,11 @@ services:
     image: ${CONVERGENCE_DOCKER_REPO}/convergence-server:${CONVERGENCE_DOCKER_TAG}
     # restart: always
     volumes:
-       - ./config/convergence/log4j2.xml:/opt/convergence-server/conf/log4j2.xml
-       - ./config/convergence/convergence-server.conf:/opt/convergence-server/conf/convergence-server.conf
+      - ./config/convergence/log4j2.xml:/opt/convergence-server/conf/log4j2.xml
+      - ./config/convergence/convergence-server.conf:/opt/convergence-server/conf/convergence-server.conf
     links:
-     - cluster-seed
-     - orientdb
+      - cluster-seed
+      - orientdb
 
   ##
   ## Serves the Convergence Admin Console
@@ -52,9 +51,9 @@ services:
     image: ${CONVERGENCE_DOCKER_REPO}/convergence-admin-console:${CONVERGENCE_DOCKER_TAG}
     # restart: always
     environment:
-      CONVERGENCE_SERVER_REALTIME_API: "https://${DOCKER_HOSTNAME}/realtime/"
-      CONVERGENCE_SERVER_REST_API: "https://${DOCKER_HOSTNAME}/rest/"
-      CONVERGENCE_CONSOLE_BASE_URL: "/console/"
+      CONVERGENCE_SERVER_REALTIME_API: 'https://${DOCKER_HOSTNAME}/realtime/'
+      CONVERGENCE_SERVER_REST_API: 'https://${DOCKER_HOSTNAME}/rest/'
+      CONVERGENCE_CONSOLE_BASE_URL: '/console/'
 
   ##
   ## The proxy simply creates a single HTTP/HTTP Ingress and forwards traffic
@@ -72,5 +71,5 @@ services:
       - server
       - admin-console
     ports:
-      - "443:443"
-      - "80:80"
+      - '443:443'
+      - '80:80'

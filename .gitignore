@@ -3,6 +3,11 @@
 /.pnp
 .pnp.js
 
+
+#docker
+
+docker/data
+
 # testing
 /coverage
 
